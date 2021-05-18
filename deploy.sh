@@ -12,14 +12,22 @@ if [ -z ${CF_SPACE+x} ]; then echo 'Error: Environment variable CF_SPACE is unde
 
 # set optional Cloud Foundry variables if they are not set
 # - CF_API: IBM Cloud API endpoint (default to US-South region)
-if [ -z ${CF_API+x} ]; then export CF_API='https://api.ng.bluemix.net'; fi
+# if [ -z ${CF_API+x} ]; then export CF_API='https://api.ng.bluemix.net'; fi
+if [ -z ${CF_API+x} ]; then export CF_API='https://cloud.ibm.com'; fi
 
 if [ ${invocation_error} -eq 1 ]; then echo 'Something went wrong, check for previous errors.'; exit 1; fi
 
 # login and set target
-./Bluemix_CLI/bin/bluemix config --check-version false
-./Bluemix_CLI/bin/bluemix api $CF_API
-./Bluemix_CLI/bin/bluemix login --apikey $BXIAM
-./Bluemix_CLI/bin/bluemix target -o $CF_ORGANIZATION -s $CF_SPACE
+#./Bluemix_CLI/bin/bluemix config --check-version false
+#./Bluemix_CLI/bin/bluemix api $CF_API
+#./Bluemix_CLI/bin/bluemix login --apikey $BXIAM
+#./Bluemix_CLI/bin/bluemix target -o $CF_ORGANIZATION -s $CF_SPACE
 
-./Bluemix_CLI/bin/bluemix cf push
+#./Bluemix_CLI/bin/bluemix cf push
+
+ibmcloud config --check-version false
+ibmcloud api $CF_API
+ibmcloud login --apikey $BXIAM
+ibmcloud target -o $CF_ORGANIZATION -s $CF_SPACE
+
+ibmcloud cf push

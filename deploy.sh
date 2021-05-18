@@ -30,4 +30,5 @@ ibmcloud api $CF_API
 ibmcloud login --apikey $BXIAM
 ibmcloud target -o $CF_ORGANIZATION -s $CF_SPACE
 
+ibmcloud cf install
 ibmcloud cf push
